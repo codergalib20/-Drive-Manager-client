@@ -1,0 +1,66 @@
+.folder_layout {
+  width: 100%;
+  max-width: 1290px;
+  margin: 0 auto;
+  padding: 10px 15px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 10px;
+}
+/* Add responsive design for layout */
+@media (max-width: 1190px) {
+  .folder_layout {
+    grid-template-columns: repeat(11, 1fr);
+  }
+}
+@media (max-width: 1090px) {
+  .folder_layout {
+    grid-template-columns: repeat(10, 1fr);
+  }
+}
+@media (max-width: 990px) {
+  .folder_layout {
+    grid-template-columns: repeat(9, 1fr);
+  }
+}
+@media (max-width: 890px) {
+  .folder_layout {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+@media (max-width: 790px) {
+  .folder_layout {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+@media (max-width: 690px) {
+  .folder_layout {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+@media (max-width: 590px) {
+  .folder_layout {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media (max-width: 490px) {
+  .folder_layout {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 390px) {
+  .folder_layout {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 290px) {
+  .folder_layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 190px) {
+  .folder_layout {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

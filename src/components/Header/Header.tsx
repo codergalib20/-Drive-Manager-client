@@ -1,8 +1,18 @@
 import { AiOutlineMenu, AiOutlineAppstoreAdd } from 'react-icons/ai';
 import AddFolder from '../AddFolder';
-import CreateModal from '../CreateModal';
+// import CreateModal from '../CreateModal';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './Header.module.css';
+import { handleAddFolder } from '../../feature/handler/handlerSlice';
+
+
 const Header: React.FC = () => {
+    const dispatch = useDispatch();
+    const { isAddFolder } = useSelector((state: any) => state.handler) || {};
+
+    const handleOpen = () => {
+        dispatch(handleAddFolder({ open: true }))
+    }
     return (
         <div className={styles.header}>
             <div className={styles.container}>
@@ -14,7 +24,7 @@ const Header: React.FC = () => {
                         <button><AiOutlineMenu /></button>
                     </div>
                     <div>
-                        <button className={styles.add_icon_button}>
+                        <button onClick={handleOpen} className={styles.add_icon_button}>
                             <AiOutlineAppstoreAdd />
                         </button>
                     </div>
@@ -23,7 +33,7 @@ const Header: React.FC = () => {
                     </div>
                 </div>
             </div>
-            {/* <AddFolder /> */}
+            {isAddFolder && <AddFolder />}
         </div>
     )
 }

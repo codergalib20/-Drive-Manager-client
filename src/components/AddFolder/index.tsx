@@ -1,11 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { handleAddFolder } from "../../feature/handler/handlerSlice";
 import CreateModal from "../CreateModal";
 import styles from './AddFolder.module.css';
 const AddFolder = () => {
     const [folderName, setFolderName] = useState('');
     const [folderPath, setFolderPath] = useState('');
+    const dispatch = useDispatch();
 
+
+    const handleOpen = () => {
+        dispatch(handleAddFolder({ open: true }))
+    }
     const handleChange = (e: string) => {
     }
     const handleSubmit = (e: any) => {
@@ -23,7 +30,7 @@ const AddFolder = () => {
 
 
     return (
-        <CreateModal >
+        <CreateModal handleOpen={handleOpen} >
             <div>
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <div>

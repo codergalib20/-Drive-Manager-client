@@ -5,7 +5,7 @@ import Signup from "./components/Signup";
 import { Routes, Route } from "react-router-dom";
 import useAuthCheckHook from "./hooks/useAuthCheckHook";
 import PrivateRoute from "./hooks/PrivateRoute";
-
+import "./App.css"
 
 const App: React.FC = () => {
 

@@ -1,9 +1,11 @@
 import styles from './CreateModa.module.css';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 type Props = {
     children: React.ReactNode;
+    handleOpen: () => void;
 }
-export default function CreateModal({ children }: Props) {
+
+export default function CreateModal({ children, handleOpen }: Props) {
     const animation = {
         hidden: {
             opacity: 0,
@@ -13,8 +15,8 @@ export default function CreateModal({ children }: Props) {
             opacity: 1,
             y: 0,
             transition: {
-                delay: 0.5,
-                duration: 0.5
+                delay: 2,
+                duration: 2
             }
         },
         exit: {
@@ -26,22 +28,24 @@ export default function CreateModal({ children }: Props) {
         }
     }
     return (
-        <motion.div
-            variants={animation}
-            className={styles.modal_body} >
-            <div className={styles.modal_container}>
-                <div className={styles.modal_header}>
-                    <div className={styles.modal_header_title}>
-                        <h3>Create New</h3>
+        <AnimatePresence>
+            <motion.div
+                variants={animation}
+                className={styles.modal_body} >
+                <div className={styles.modal_container}>
+                    <div className={styles.modal_header}>
+                        <div className={styles.modal_header_title}>
+                            <h3>Create New</h3>
+                        </div>
+                        <div onClick={handleOpen} className={styles.modal_header_close}>
+                            <button>X</button>
+                        </div>
                     </div>
-                    <div className={styles.modal_header_close}>
-                        <button>X</button>
+                    <div className={styles.modal_content}>
+                        {children}
                     </div>
                 </div>
-                <div className={styles.modal_content}>
-                    {children}
-                </div>
-            </div>
-        </motion.div>
+            </motion.div>
+        </AnimatePresence>
     )
 }

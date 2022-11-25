@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: flex-start;
 }
-.modal_body .modal_container {
+.modal_container {
   width: 500px;
   background: #fff;
   border-radius: 5px;
@@ -18,7 +18,7 @@
   position: relative;
   margin-top: 50px;
 }
-.modal_body .modal_container .modal_header {
+ .modal_header {
   display: flex;
   justify-content: space-between;
   align-items: center;

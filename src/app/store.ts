@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import apiSlice from "../feature/api/apiSlice";
 import authSliceReducer from "../feature/auth/authSlice";
 import folderSliceReducer from "../feature/folders/folderSlice";
+import handlerSliceReducer from "../feature/handler/handlerSlice";
 export const store = configureStore({
   reducer: {
     // Add your reducers here
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: authSliceReducer,
     folders: folderSliceReducer,
+    handler: handlerSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
