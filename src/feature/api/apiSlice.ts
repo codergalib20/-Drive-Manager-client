@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000",
+    baseUrl: "https://drive-manager-server.onrender.com",
     prepareHeaders: (headers, { getState, endpoint }) => {
       const token = (getState() as any)?.auth?.token;
       if (token) {
