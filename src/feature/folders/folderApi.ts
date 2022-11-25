@@ -1,4 +1,5 @@
 import apiSlice from "../api/apiSlice";
+import { getFolders } from "./folderSlice";
 
 export const folderApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -7,17 +8,24 @@ export const folderApi = apiSlice.injectEndpoints({
       query: ({ email, parent }: any) => `/api/v1/folders/${email}/${parent}`,
       keepUnusedDataFor: 600,
       providesTags: ["Folder"],
+      // Loaded folder save to the cache on success
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          dispatch(getFolders((result as any)?.data.data));
+        } catch (err) {}
+      },
     }),
     // Add a new endpoint called `getFolders`
     getFolders: builder.query({
-      query: () => `folders`,
+      query: () => `/api/v1/folders`,
     }),
     // Add a new endpoint called `createFolder`
-    createFolder: builder.mutation({
-      query: (folder) => ({
-        url: `folders`,
+    addFolder: builder.mutation({
+      query: (body) => ({
+        url: `/api/v1/folders`,
         method: "POST",
-        body: folder,
+        body,
       }),
       invalidatesTags: ["Folder"],
     }),
@@ -44,7 +52,7 @@ export const folderApi = apiSlice.injectEndpoints({
 export const {
   useGetFolderByEmailQuery,
   useGetFoldersQuery,
-  useCreateFolderMutation,
+  useAddFolderMutation,
   useUpdateFolderMutation,
   useDeleteFolderMutation,
 } = folderApi;

@@ -59,4 +59,8 @@
   z-index: 3;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-size: 16px;
+}
+.editor:first-child {
+  right: 30px;
 }

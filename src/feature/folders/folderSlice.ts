@@ -1,14 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {};
+type FolderState = {
+  folders: any[];
+  folder: any;
+};
 
+const initialState: FolderState = {
+  folders: [],
+  folder: {},
+};
 
 const folderSlice = createSlice({
-    name: "auth",
-    initialState,
-    reducers: {},
-
+  name: "auth",
+  initialState,
+  reducers: {
+    getFolders: (state, action) => {
+      state.folders = action.payload;
+    },
+  },
 });
 
-export const {} = folderSlice.actions;
+export const { getFolders } = folderSlice.actions;
 export default folderSlice.reducer;
