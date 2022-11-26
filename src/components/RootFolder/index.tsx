@@ -3,6 +3,9 @@ import FolderLayout from '../FolderLayout';
 import Header from '../Header/Header';
 import { useSelector } from 'react-redux';
 import Folder from '../Folder';
+import LoadingFolders from '../ui/LoadingFolders';
+import Error from '../ui/Error';
+import BlankMessage from '../ui/BlankMessage';
 
 
 const RootFolder = () => {
@@ -11,12 +14,15 @@ const RootFolder = () => {
     const { data: folders, isError, isLoading, isSuccess } = useGetFolderByEmailQuery({ email, parent: "root" });
     let content = null;
     if (isLoading) {
-        content = <div>Loading...</div>
-    } else if (isError) {
-        content = <div>That was server error please reload your application</div>
-    } else if (isSuccess && (folders as any)?.data?.length === 0) {
-        content = <div>No File </div>
-    } else if (isSuccess && (folders as any)?.data?.length > 0) {
+        content = <LoadingFolders />
+    }
+    if (isError) {
+        content = <Error />
+    }
+    if ((folders as any)?.data?.length === 0) {
+        content = <BlankMessage message="No content show" />
+    }
+    if ((folders as any)?.data?.length > 0) {
         content = (
             //  Import folder_layout css from App.js
             <div className='folder_layout' >

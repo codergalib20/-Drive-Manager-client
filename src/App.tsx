@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import useAuthCheckHook from "./hooks/useAuthCheckHook";
 import PrivateRoute from "./hooks/PrivateRoute";
 import "./App.css"
+import PublicRoute from "./hooks/PublicRoute";
 
 const App: React.FC = () => {
 
@@ -18,9 +19,21 @@ const App: React.FC = () => {
     <Routes>
       <Route path="/" element={<PrivateRoute><RootFolder /></PrivateRoute>}
       />
-      <Route path="*" element={<RootFolder />} />
-      <Route path="signin" element={<SignIn />} />
-      <Route path="signup" element={<Signup />} />
+      <Route path="*" element={
+        <PrivateRoute>
+          <RootFolder />
+        </PrivateRoute>
+      } />
+      <Route path="signin" element={
+        <PublicRoute>
+          <SignIn />
+        </PublicRoute>
+      } />
+      <Route path="signup" element={
+        <PublicRoute>
+          <Signup />
+        </PublicRoute>
+      } />
     </Routes>
   )
 };

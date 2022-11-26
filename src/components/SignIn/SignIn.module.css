@@ -67,6 +67,8 @@ img {
   color: #fff;
   font-size: 1rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 .form_card .buttons {
   display: flex;
@@ -74,4 +76,9 @@ img {
   align-items: center;
   width: 100%;
 
+}
+
+.form_card a{
+  color: #000;
+  font-size: 0.9rem;
 }

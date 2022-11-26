@@ -1,0 +1,65 @@
+.blank_message_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+}
+.blank_message_image_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200%;
+  width: 200px;
+  text-align: center;
+}
+.blank_message_image_box img {
+  height: 100%;
+  width: 100%;
+}
+.blank_message_text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+@media (max-width: 9090px) {
+  .blank_message_box {
+    height: 300px;
+  }
+  .blank_message_image_box {
+    width: 150px;
+  }
+  .blank_message_text {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 690px) {
+  .blank_message_box {
+    height: 250px;
+  }
+  .blank_message_image_box {
+    width: 150px;
+  }
+  .blank_message_text {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 490px) {
+  .blank_message_box {
+    height: 200px;
+  }
+  .blank_message_image_box {
+    width: 100px;
+  }
+  .blank_message_text {
+    font-size: 1rem;
+  }
+}

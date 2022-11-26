@@ -1,9 +1,10 @@
-import { AiOutlineMenu, AiOutlineAppstoreAdd } from 'react-icons/ai';
+import { AiOutlineMenu, AiOutlineAppstoreAdd, AiOutlineLogout } from 'react-icons/ai';
 import AddFolder from '../AddFolder';
 // import CreateModal from '../CreateModal';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Header.module.css';
 import { handleAddFolder } from '../../feature/handler/handlerSlice';
+import { userLoggedOut } from '../../feature/auth/authSlice';
 
 
 const Header: React.FC = () => {
@@ -12,6 +13,11 @@ const Header: React.FC = () => {
 
     const handleOpen = () => {
         dispatch(handleAddFolder({ open: true }))
+    }
+    const handleLogout = () => {
+        dispatch(userLoggedOut());
+        localStorage.removeItem('folder_manager');
+        window.location.reload();
     }
     return (
         <div className={styles.header}>
@@ -28,8 +34,11 @@ const Header: React.FC = () => {
                             <AiOutlineAppstoreAdd />
                         </button>
                     </div>
-                    <div>
+                    <div className={styles.search_box}>
                         <input className={styles.search_input} type="search" name="" placeholder='Search here...' id="" />
+                        <button onClick={handleLogout}>
+                            <AiOutlineLogout />
+                        </button>
                     </div>
                 </div>
             </div>

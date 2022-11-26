@@ -17,14 +17,14 @@ img {
   align-items: center;
   grid-area: right;
 }
-.form_card_parent form{
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 1rem;
+.form_card_parent form {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
 }
 .form_card {
   width: 100%;
@@ -58,20 +58,26 @@ img {
   outline: none;
   width: 100%;
 }
-.form_card button{
-    padding: 0.5rem;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    background-color: #000;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
+.form_card button {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  background-color: #000;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 .form_card .buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
 
+.form_card a {
+  color: #000;
+  font-size: 0.9rem;
 }

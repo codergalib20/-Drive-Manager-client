@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useSigninMutation } from '../../feature/auth/authApi';
+import LoadingButton from '../ui/LoadingButton';
 
 const SignIn = () => {
     const [email, setEmail] = useState<string>('');
@@ -17,9 +18,10 @@ const SignIn = () => {
     };
 
     useEffect(() => {
-        if (data) {
+        if (data && data.token) {
             toast.success('Signin successful');
             navigate('/');
+            window.location.reload();
         }
         if (isError) {
             toast.error(`${(error as any).data?.error}`);
@@ -54,7 +56,9 @@ const SignIn = () => {
                                     type="password" name="password" id="password" />
                             </div>
                             <div className={styles.buttons}>
-                                <button disabled={isLoading} type="submit">Sign In</button>
+                                <button disabled={isLoading} type="submit">Sign In
+                                    {isLoading && <LoadingButton />}
+                                </button>
                                 <Link to="/signup">Are you new user?</Link>
                             </div>
                         </form>

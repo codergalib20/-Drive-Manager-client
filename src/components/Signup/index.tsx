@@ -4,12 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useSignupMutation } from "../../feature/auth/authApi";
+import LoadingButton from "../ui/LoadingButton";
 const Signup = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [name, setName] = useState<string>('');
-    const [signup, { data, isLoading, isError, error }] = useSignupMutation()
+    const [signup, { data, isLoading, isError, error, isSuccess }] = useSignupMutation()
     const navigate = useNavigate();
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -22,14 +23,15 @@ const Signup = () => {
     };
 
     useEffect(() => {
-        if (data) {
+        if (data && isSuccess) {
             toast.success('Signup successful');
             navigate('/');
+            window.location.reload();
         }
         if (isError) {
             toast.error(`${(error as any).data?.error}`);
         }
-    }, [data, error, isError, navigate])
+    }, [data, error, isError, navigate, isSuccess])
     const clearForm = () => {
         setEmail('');
         setPassword('');
@@ -74,7 +76,10 @@ const Signup = () => {
                                     onChange={e => setConfirmPassword(e.target.value)} type="password" name="confirmPassword" id="confirmPassword" />
                             </div>
                             <div className={styles.buttons}>
-                                <button disabled={isLoading} type="submit">Sign Up</button>
+                                <button disabled={isLoading} type="submit">
+                                    Sign Up
+                                    {isLoading && <LoadingButton />}
+                                </button>
                                 <Link to="/signin">Already user?</Link>
                             </div>
                         </form>
