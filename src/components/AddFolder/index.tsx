@@ -7,7 +7,10 @@ import { handleAddFolder } from "../../feature/handler/handlerSlice";
 import CreateModal from "../CreateModal";
 import LoadingButton from "../ui/LoadingButton";
 import styles from './AddFolder.module.css';
-const AddFolder = () => {
+type Props = {
+    path?: string
+}
+const AddFolder = ({ path }: Props) => {
     const [addFolder, { isError, isLoading, isSuccess, }] = useAddFolderMutation();
     const [folderName, setFolderName] = useState('');
     const [folderPath, setFolderPath] = useState('');
@@ -17,8 +20,9 @@ const AddFolder = () => {
     const [conflict, setConflict] = useState<boolean>(false);
     const dispatch = useDispatch();
 
+    const makeParent: string = path || 'root';
     const handleOpen = (): any => {
-        dispatch(handleAddFolder({ open: true }));
+        dispatch(handleAddFolder({ open: true })) // open modal;
     }
     const handleChange = (e: string) => {
         setFolderName(e)
@@ -38,7 +42,7 @@ const AddFolder = () => {
                 name: folderName,
                 path: folderPath,
                 user: email,
-                folders: folders
+                parent: makeParent
             });
         }
     }

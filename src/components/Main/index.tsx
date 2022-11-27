@@ -10,7 +10,7 @@ const Main = () => {
             <Routes>
                 <Route path="/" element={<RootFolder />} />
                 {/* <Route path="*" element={<RootFolder />} /> */}
-                <Route path="folder/:id/:path" element={<SingleFolder />} />
+                <Route path="folder/start/:parent/end/:id/:path" element={<SingleFolder />} />
             </Routes>
         </div>
     );

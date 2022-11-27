@@ -6,11 +6,13 @@ import styles from './Header.module.css';
 import { handleAddFolder } from '../../feature/handler/handlerSlice';
 import { userLoggedOut } from '../../feature/auth/authSlice';
 
-
 const Header: React.FC = () => {
     const dispatch = useDispatch();
     const { isAddFolder } = useSelector((state: any) => state.handler) || {};
-
+    // select string from / to last length
+    // const path = location.pathname.slice('1', location.pathname.length);
+    const current = window.location.pathname
+    const path = current.slice(current.indexOf('start/') + 6, current.indexOf('/end'));
     const handleOpen = () => {
         dispatch(handleAddFolder({ open: true }))
     }
@@ -42,7 +44,7 @@ const Header: React.FC = () => {
                     </div>
                 </div>
             </div>
-            {isAddFolder && <AddFolder />}
+            {isAddFolder && <AddFolder path={path} />}
         </div>
     )
 }

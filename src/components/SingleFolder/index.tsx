@@ -1,13 +1,15 @@
-
+import styles from './SingleFolder.module.css';
 import { useParams } from "react-router-dom";
 import { useGetFolderByIdPathQuery } from "../../feature/folders/folderApi";
 import BlankMessage from "../ui/BlankMessage";
 import Error from "../ui/Error";
+import SidebarDetails from './SidebarDetails';
+import FoldersShow from './FoldersShow';
 
 
 const SingleFolder = () => {
     const { id, path } = useParams();
-    const { data, isLoading, isError, error } = useGetFolderByIdPathQuery({ id, path });
+    const { data, isLoading, isError, isSuccess } = useGetFolderByIdPathQuery({ id, path });
 
     let content = null;
     if (isLoading) {
@@ -24,13 +26,15 @@ const SingleFolder = () => {
         content = <BlankMessage message="No data found!" />
     }
     if (data?.data[0]?.user) {
-        let { name, user, path, parent } = data.data[0] || {};
-        content = <div >
-            <h1>{name}</h1>
-            <h2>{user}</h2>
-            <h2>{path}</h2>
-            <h2>{parent}</h2>
-        </div>
+        let currentData = data.data[0] || {};
+        content = (
+            <div className={styles.single_folder_parent}>
+                {/* Main Content */}
+                <FoldersShow success={isSuccess} />
+                {/* Sidebar Details */}
+                <SidebarDetails data={currentData} />
+            </div>
+        )
     }
 
     return (
@@ -43,8 +47,6 @@ const SingleFolder = () => {
             }
             }
         >
-            hello
-            Single Folder {id} + {path}
             {content}
         </div>
     )

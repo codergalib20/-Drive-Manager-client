@@ -33,7 +33,7 @@ const Folder = ({ folder }: any) => {
     const handleGo = () => {
         // Create a react router link to the folder
         if (!isSuccess || !isLoading) {
-            navigate(`/folder/${folder._id}/${folder.path}`);
+            navigate(`/folder/start/${folder.path}/end/${folder._id}/${folder.path}`);
         }
     }
     return (
@@ -46,7 +46,7 @@ const Folder = ({ folder }: any) => {
                 <button disabled={isLoading || isSuccess} onClick={handleDelete} className={styles.editor}>
                     {isLoading || isSuccess ? <LoadingButton /> : <AiFillDelete />}
                 </button>
-                <div onClick={handleGo} className={styles.touch_button}>
+                <div onDoubleClick={handleGo} className={styles.touch_button}>
                     <FcOpenedFolder />
                 </div>
             </div>
