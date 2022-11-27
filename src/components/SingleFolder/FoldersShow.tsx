@@ -1,21 +1,31 @@
+import { AiOutlineAppstoreAdd } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { useGetFolderByEmailQuery } from '../../feature/folders/folderApi';
+import { handleAddFolder } from '../../feature/handler/handlerSlice';
 import Folder from '../Folder';
 import BlankMessage from '../ui/BlankMessage';
 import Error from '../ui/Error';
 import LoadingFolders from '../ui/LoadingFolders';
 import styles from './SingleFolder.module.css';
-
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import AddFolder from '../AddFolder';
 
 type PropsTypes = {
     success: boolean;
+    errors: any;
 }
-export default function FoldersShow({ success }: PropsTypes) {
+export default function FoldersShow({ success, errors }: PropsTypes) {
     const { path } = useParams();
     const { user } = useSelector((state: any) => state.auth) || {};
     const { email } = user || {};
     const { data, isLoading, isError } = useGetFolderByEmailQuery({ email, parent: path });
+    const { isAddFolder } = useSelector((state: any) => state.handler) || {};
+
+    const dispatch = useDispatch();
+    const handleOpen = () => {
+        dispatch(handleAddFolder({ open: true }))
+    }
     let content = null;
     const array = [0, 1, 2, 3, 4, 5, 6, 7, 8,]
     if (isLoading) {
@@ -30,17 +40,25 @@ export default function FoldersShow({ success }: PropsTypes) {
     if ((data as any)?.data?.length > 0) {
         content = (
             //  Import folder_layout css from App.js
-            <div className={styles.folder_layout} >
-                {
-                    data?.data?.map((folder: any) => <Folder
-                        key={folder._id} folder={folder} />)
-                }
+            <div>
+                <div className={styles.folder_layout} >
+                    {
+                        data?.data?.map((folder: any) => <Folder
+                            key={folder._id} folder={folder} />)
+                    }
+                </div>
             </div>
         )
     }
-
+    console.log(isAddFolder)
     return (
         <div>
+            {!errors && <div style={{ marginBottom: '30px', }}>
+                {isAddFolder && <AddFolder path={path} />}
+                <button onClick={handleOpen} className="add_icon_button">
+                    <AiOutlineAppstoreAdd />
+                </button>
+            </div>}
             {content}
         </div>
     )

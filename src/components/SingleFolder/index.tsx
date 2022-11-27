@@ -30,7 +30,7 @@ const SingleFolder = () => {
         content = (
             <div className={styles.single_folder_parent}>
                 {/* Main Content */}
-                <FoldersShow success={isSuccess} />
+                <FoldersShow success={isSuccess} errors={isError} />
                 {/* Sidebar Details */}
                 <SidebarDetails data={currentData} />
             </div>
