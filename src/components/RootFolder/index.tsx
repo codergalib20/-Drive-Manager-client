@@ -16,7 +16,7 @@ const RootFolder = () => {
     const { isAddFolder } = useSelector((state: any) => state.handler) || {};
     const { email } = user || {};
     const { data: folders, isError, isLoading } = useGetFolderByEmailQuery({ email, parent: "root" });
-    const { path } = useParams();
+    const { path, id } = useParams();
     const dispatch = useDispatch();
     const handleOpen = () => {
         dispatch(handleAddFolder({ open: true }))
@@ -60,7 +60,7 @@ const RootFolder = () => {
                 padding: '0 15px',
 
             }}>
-                {isAddFolder && <AddFolder path={path} />}
+                {isAddFolder && <AddFolder path={path} id={id} />}
                 <button onClick={handleOpen} className="add_icon_button">
                     <AiOutlineAppstoreAdd />
                 </button>

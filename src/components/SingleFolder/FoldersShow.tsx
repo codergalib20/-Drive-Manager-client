@@ -16,10 +16,10 @@ type PropsTypes = {
     errors: any;
 }
 export default function FoldersShow({ success, errors }: PropsTypes) {
-    const { path } = useParams();
+    const { path, id } = useParams();
     const { user } = useSelector((state: any) => state.auth) || {};
     const { email } = user || {};
-    const { data, isLoading, isError } = useGetFolderByEmailQuery({ email, parent: path });
+    const { data, isLoading, isError } = useGetFolderByEmailQuery({ email, parent: id });
     const { isAddFolder } = useSelector((state: any) => state.handler) || {};
 
     const dispatch = useDispatch();
@@ -54,7 +54,7 @@ export default function FoldersShow({ success, errors }: PropsTypes) {
     return (
         <div>
             {!errors && <div style={{ marginBottom: '30px', }}>
-                {isAddFolder && <AddFolder path={path} />}
+                {isAddFolder && <AddFolder path={path} id={id} />}
                 <button onClick={handleOpen} className="add_icon_button">
                     <AiOutlineAppstoreAdd />
                 </button>
