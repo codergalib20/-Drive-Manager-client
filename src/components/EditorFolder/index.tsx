@@ -41,10 +41,14 @@ const EditorFolder = ({ handleOpen }: Props) => {
         if (folderName === '') {
             toast.error('Folder name is required');
         }
-
         let name = folderName.split(' ').join('-');
         // if user type '' / " |" \ / : * ? " < > |   then replace with '-'
         name = name.replace(/[/|\\:*?"<>|]/g, '-');
+
+        if (folderName.length < 3) {
+            toast.error('name must be up to 3 characters');
+            return;
+        }
 
         if (folderName !== '') {
             updateFolder({

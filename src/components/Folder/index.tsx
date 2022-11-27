@@ -46,7 +46,7 @@ const Folder = ({ folder }: any) => {
                 <button disabled={isLoading || isSuccess} onClick={handleDelete} className={styles.editor}>
                     {isLoading || isSuccess ? <LoadingButton /> : <AiFillDelete />}
                 </button>
-                <div onDoubleClick={handleGo} className={styles.touch_button}>
+                <div onClick={handleGo} className={styles.touch_button}>
                     <FcOpenedFolder />
                 </div>
             </div>

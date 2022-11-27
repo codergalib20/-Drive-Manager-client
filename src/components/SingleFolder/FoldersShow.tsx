@@ -50,9 +50,8 @@ export default function FoldersShow({ success, errors }: PropsTypes) {
             </div>
         )
     }
-    console.log(isAddFolder)
     return (
-        <div>
+        <div className={styles.data_show_box}>
             {!errors && <div style={{ marginBottom: '30px', }}>
                 {isAddFolder && <AddFolder path={path} id={id} />}
                 <button onClick={handleOpen} className="add_icon_button">

@@ -3,11 +3,11 @@ import { AiOutlineMenu, AiOutlineLogout } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import styles from './Header.module.css';
 import { userLoggedOut } from '../../feature/auth/authSlice';
+import { useSelector } from 'react-redux';
 const Header: React.FC = () => {
     const dispatch = useDispatch();
-    // select string from / to last length
-    // const path = location.pathname.slice('1', location.pathname.length);
-
+    const { user } = useSelector((state: any) => state.auth) || {};
+    const { email, name } = user || {};
     const handleLogout = () => {
         dispatch(userLoggedOut());
         localStorage.removeItem('folder_manager');
@@ -18,14 +18,12 @@ const Header: React.FC = () => {
             <div className={styles.container}>
                 <div className={styles.container_wrapper}>
                     <div className={styles.buttons}>
-                        <button><AiOutlineMenu /></button>
-                        <button><AiOutlineMenu /></button>
-                        <button><AiOutlineMenu /></button>
-                        <button><AiOutlineMenu /></button>
+                        <h2>{name}</h2>
+                        <small style={{alignSelf: 'flex-end', marginLeft: '3px'}}>{email}</small>
                     </div>
 
                     <div className={styles.search_box}>
-                        <input className={styles.search_input} type="search" name="" placeholder='Search here...' id="" />
+                        {/* <input className={styles.search_input} type="search" name="" placeholder='Search here...' id="" /> */}
                         <button onClick={handleLogout}>
                             <AiOutlineLogout />
                         </button>

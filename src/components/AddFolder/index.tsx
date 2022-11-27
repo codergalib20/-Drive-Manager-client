@@ -35,11 +35,17 @@ const AddFolder = ({ path, id }: Props) => {
     }
     const handleSubmit = (e: any) => {
         e.preventDefault();
+        if (folderName.length < 3) {
+            toast.error('name must be up to 3 characters');
+            return;
+        }
         if (folderName === '') {
             toast.error('Folder name is required');
+            return;
         }
         if (folderPath === '') {
             toast.error('Folder path is required');
+            return;
         }
         if (folderName !== '' && folderPath !== '') {
             addFolder({
@@ -61,7 +67,6 @@ const AddFolder = ({ path, id }: Props) => {
             toast.warning('Folder name already exists');
         }
         if (isError) {
-            console.log(error);
             toast.error('Network error occured');
         }
         if (isSuccess) {

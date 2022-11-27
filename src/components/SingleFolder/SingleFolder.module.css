@@ -34,15 +34,17 @@
   grid-gap: 10px;
   margin: 10px 0;
 }
-.folders_show_parent {
-  border-right: 1px solid #e5e;
-}
-
 .folder_layout {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   grid-gap: 10px;
 }
+.data_show_box{
+  border-right: 1px solid #e5e;
+}
+/*------------------------------------ */
+/* Write responsive design here... */
+/*------------------------------------ */
 @media (max-width: 1168px) {
   .folder_layout {
     grid-template-columns: repeat(8, 1fr);
@@ -50,8 +52,19 @@
 }
 
 @media (max-width: 1056px) {
+  .single_folder_parent {
+    grid-template-columns: 1fr;
+  }
   .folder_layout {
     grid-template-columns: repeat(7, 1fr);
+  }
+  .sidebar_details_parent ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  .data_show_box{
+    border-right: 1px solid transparent;
   }
 }
 
