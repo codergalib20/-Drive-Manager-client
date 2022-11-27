@@ -1,5 +1,5 @@
 
-### technology
+## technology
 
 - CSS module
 - framer-motion
@@ -7,6 +7,8 @@
 - React toastify
 - React Icons
 - Typescript
+- JWT authentication
+
 
 ## Drive manager feature
 
@@ -15,3 +17,4 @@
 - user can visite inside of the folder user can delete and user can edit this created folder
 - user can create subfolder inside of any folder
 - user cannot delete the root folder
+
