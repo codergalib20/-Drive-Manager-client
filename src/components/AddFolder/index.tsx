@@ -26,7 +26,9 @@ const AddFolder = ({ path }: Props) => {
     }
     const handleChange = (e: string) => {
         setFolderName(e)
-        const createPath = e.split(' ').join('-');
+        let createPath = e.split(' ').join('-');
+        // if user type '' / " |" \ / : * ? " < > |   then replace with '-'
+        createPath = createPath.replace(/[/|\\:*?"<>|]/g, '-');
         setFolderPath(createPath);
     }
     const handleSubmit = (e: any) => {
