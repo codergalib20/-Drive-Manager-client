@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useAddFolderMutation } from "../../feature/folders/folderApi";
 import { handleAddFolder } from "../../feature/handler/handlerSlice";
 import CreateModal from "../CreateModal";
+import LoadingButton from "../ui/LoadingButton";
 import styles from './AddFolder.module.css';
 const AddFolder = () => {
     const [addFolder, { isError, isLoading, isSuccess, }] = useAddFolderMutation();
@@ -16,8 +17,8 @@ const AddFolder = () => {
     const [conflict, setConflict] = useState<boolean>(false);
     const dispatch = useDispatch();
 
-    const handleOpen = () => {
-        dispatch(handleAddFolder({ open: true }))
+    const handleOpen = (): any => {
+        dispatch(handleAddFolder({ open: true }));
     }
     const handleChange = (e: string) => {
         setFolderName(e)
@@ -70,7 +71,9 @@ const AddFolder = () => {
                     </div>
                     {
                         !conflict && <div>
-                            <button disabled={isLoading} type='submit'>Add Folder</button>
+                            <button disabled={isLoading} type='submit'>
+                                {isLoading || isSuccess ? <LoadingButton /> : 'Create'}
+                            </button>
                         </div>
                     }
                 </form>

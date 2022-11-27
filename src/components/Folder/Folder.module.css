@@ -1,3 +1,7 @@
+.folder {
+  text-decoration: none;
+  color: #000;
+}
 .folder_card {
   display: flex;
   flex-direction: column;

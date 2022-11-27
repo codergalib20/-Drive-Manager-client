@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface HandlerState {
-  isEditor: boolean;
+  isEditor: any;
   isAddFolder: boolean;
 }
 
 const initialState: HandlerState = {
-  isEditor: false,
+  isEditor: null,
   isAddFolder: false,
 };
 
@@ -15,7 +15,7 @@ export const handlerSlice = createSlice({
   initialState,
   reducers: {
     handleEditor: (state, action) => {
-      state.isEditor = !state.isEditor;
+      state.isEditor = action.payload;
     },
     handleAddFolder: (state, action) => {
       state.isAddFolder = !state.isAddFolder;

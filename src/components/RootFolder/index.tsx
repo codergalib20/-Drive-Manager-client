@@ -1,17 +1,15 @@
 import { useGetFolderByEmailQuery } from '../../feature/folders/folderApi';
 import FolderLayout from '../FolderLayout';
-import Header from '../Header/Header';
 import { useSelector } from 'react-redux';
 import Folder from '../Folder';
 import LoadingFolders from '../ui/LoadingFolders';
 import Error from '../ui/Error';
 import BlankMessage from '../ui/BlankMessage';
 
-
 const RootFolder = () => {
     const { user } = useSelector((state: any) => state.auth) || {};
     const { email } = user || {};
-    const { data: folders, isError, isLoading, isSuccess } = useGetFolderByEmailQuery({ email, parent: "root" });
+    const { data: folders, isError, isLoading } = useGetFolderByEmailQuery({ email, parent: "root" });
     let content = null;
     if (isLoading) {
         content = <LoadingFolders />
@@ -37,8 +35,9 @@ const RootFolder = () => {
 
     return (
         <FolderLayout >
-            <Header />
-            <div>{content}</div>
+            <div>
+                {content}
+            </div>
         </FolderLayout>
     )
 }

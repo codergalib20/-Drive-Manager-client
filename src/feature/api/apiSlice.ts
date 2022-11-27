@@ -12,7 +12,7 @@ export const apiSlice = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Auth", "Folder"],
+  tagTypes: ["Auth", "Folder", "AFolder"],
   endpoints: (builder) => ({}),
 });
 export default apiSlice;

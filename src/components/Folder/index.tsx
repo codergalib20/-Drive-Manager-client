@@ -8,13 +8,16 @@ import { handleEditor } from '../../feature/handler/handlerSlice';
 import { useDeleteFolderMutation } from '../../feature/folders/folderApi';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
+import LoadingButton from '../ui/LoadingButton';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Folder = ({ folder }: any) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [deleteFolder, { isLoading, isError, isSuccess }] = useDeleteFolderMutation();
     const { isEditor } = useSelector((state: any) => state.handler);
-    const handleOpen = () => {
-        dispatch(handleEditor({ edit: true }))
+    const handleOpenEditor = (handle: any): any => {
+        dispatch(handleEditor(handle))
     }
     const handleDelete = () => {
         deleteFolder(folder._id);
@@ -27,17 +30,23 @@ const Folder = ({ folder }: any) => {
             toast.error('Network error occured');
         }
     }, [isError, isSuccess])
+    const handleGo = () => {
+        // Create a react router link to the folder
+        if (!isSuccess || !isLoading) {
+            navigate(`/folder/${folder._id}/${folder.path}`);
+        }
+    }
     return (
         <div>
-            {isEditor && <EditorFolder handleOpen={handleOpen} />}
+            {isEditor && <EditorFolder handleOpen={handleOpenEditor} />}
             <div className={styles.folder_card}>
-                <button disabled={isLoading} onClick={handleOpen} className={styles.editor}>
-                    <AiOutlineEdit />
+                <button disabled={isLoading || isSuccess} onClick={() => handleOpenEditor(folder)} className={styles.editor}>
+                    {isLoading || isSuccess ? <LoadingButton /> : <AiOutlineEdit />}
                 </button>
-                <button onClick={handleDelete} className={styles.editor}>
-                    <AiFillDelete />
+                <button disabled={isLoading || isSuccess} onClick={handleDelete} className={styles.editor}>
+                    {isLoading || isSuccess ? <LoadingButton /> : <AiFillDelete />}
                 </button>
-                <div className={styles.touch_button}>
+                <div onClick={handleGo} className={styles.touch_button}>
                     <FcOpenedFolder />
                 </div>
             </div>
